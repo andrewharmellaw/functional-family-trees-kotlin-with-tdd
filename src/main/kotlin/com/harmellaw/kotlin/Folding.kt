@@ -21,9 +21,9 @@ fun <A, B> foldRightOverflows(l: List<A>,
     }
 }
 
-fun <T> foldRight(l: List<T>,
-                  seed: T,
-                  func: (a: T, b: T) -> T) : T {
+fun <A, B> foldRight(l: List<A>,
+                     seed: B,
+                     func: (b: B, a: A) -> B) : B {
 
     return foldLeft(l.asReversed(), seed, func)
 }

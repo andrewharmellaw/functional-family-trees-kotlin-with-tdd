@@ -9,7 +9,7 @@ class FoldLeftTests {
 
     // 1. The simplest way to call our foldLeft - on an empty list with an "add" function
     @Test
-    fun `folding on an empty list yields the seed no matter what the function`() {
+    fun `folding left on an empty list yields the seed no matter what the function`() {
         val seed = 1
         val emptyList: List<Int> = emptyList()
         assertEquals(seed, foldLeft(emptyList, seed, fun(a, b) = a + b))
@@ -17,26 +17,26 @@ class FoldLeftTests {
 
     // 2. Next we can fold on a single-item list
     @Test
-    fun `folding on a single-item list yields the result of folding that item into the seed`() {
+    fun `folding left on a single-item list yields the result of folding that item into the seed`() {
         val seed = 0
         assertEquals(seed + 1, foldLeft(listOf(1), seed, ::sum))
     }
 
     // 3. Now we can fold on a two-item list
     @Test
-    fun `folding on a two-item list yields the seed plus the first item plus the second list`() {
+    fun `folding left on a two-item list yields the seed plus the first item plus the second item`() {
         val seed = 0
         assertEquals(seed + 1 + -2 + 3, foldLeft(listOf(1, -2, 3), seed, ::sum))
     }
 
     // 4. Now we can fold on a very large list - it needn't stack overflow if we're tail-recursing
     @Test
-    fun `folding on a very large list doesn't stack overflow`() {
+    fun `folding left on a very large list doesn't stack overflow`() {
         val seed = 1
         val massiveList = mutableListOf<Int>()
         for (i in 1..10000) {
             massiveList.add(i)
         }
-        assertEquals(500501, foldLeft(massiveList, seed, ::sum))
+        assertEquals(50005001, foldLeft(massiveList, seed, ::sum))
     }
 }
