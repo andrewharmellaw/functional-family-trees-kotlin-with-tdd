@@ -11,13 +11,13 @@ tailrec fun <A, B> foldLeft(l: List<A>,
     }
 }
 
-fun <A, B> foldRightOverflows(l: List<A>,
-                              seed: B,
-                              func: (a: A, b: B) -> B) : B {
+fun <A, B> foldLeftWithoutTailRecursion(l: List<A>,
+                            seed: B,
+                            func: (b: B, a: A) -> B) : B {
 
     return when {
         l.isEmpty() -> seed
-        else -> func(l.head, foldRightOverflows(l.tail, seed, func))
+        else        -> foldLeftWithoutTailRecursion(l.tail, func(seed, l.head), func)
     }
 }
 
@@ -26,4 +26,14 @@ fun <A, B> foldRight(l: List<A>,
                      func: (b: B, a: A) -> B) : B {
 
     return foldLeft(l.asReversed(), seed, func)
+}
+
+fun <A, B> foldRightOverflows(l: List<A>,
+                              seed: B,
+                              func: (a: A, b: B) -> B) : B {
+
+    return when {
+        l.isEmpty() -> seed
+        else -> func(l.head, foldRightOverflows(l.tail, seed, func))
+    }
 }
