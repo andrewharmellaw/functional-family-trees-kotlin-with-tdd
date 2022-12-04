@@ -24,7 +24,7 @@ class FoldLeftTests {
 
     // 3. Now we can fold on a two-item list
     @Test
-    fun `folding left on a two-item list yields the seed plus the first item plus the second item`() {
+    fun `folding left on a three-item list yields the seed plus the first item plus the second item plus the third`() {
         val seed = 0
         assertEquals(seed + 1 + -2 + 3, foldLeft(listOf(1, -2, 3), seed, ::sum))
     }
